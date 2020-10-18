@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+	<Properties>
+		<Property name="LOG_PATTERN">
+			%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex
+		</Property>
+		<Property name="log-path">./log</Property>
+	</Properties>
+	<Appenders>
+<!-- 		<Console name="ConsoleAppender" target="SYSTEM_OUT" -->
+<!-- 			follow="true"> -->
+<!-- 			<PatternLayout pattern="${LOG_PATTERN}" /> -->
+<!-- 		</Console> -->
+
+		<RollingRandomAccessFile name="ASSEMBLEIA-API"
+			fileName="${log-path}/assembleia-api.log"
+			filePattern="${log-path}/assembleia-api/assembleia-api-%d{yyyy-MM-dd}.%i.zip"
+			immediateFlush="false">
+			<PatternLayout>
+				<pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+				</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+				<SizeBasedTriggeringPolicy size="100 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="30">
+				<Delete basePath="${log-path}/assembleia-api/" maxDepth="2">
+					<IfFileName glob="*.zip">
+						<IfLastModified age="30d" />
+					</IfFileName>
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingRandomAccessFile>
+	</Appenders>
+	<Loggers>
+		<Logger name="br.com.exercicio.assembleiaapi" level="trace"
+			additivity="false">
+			<AppenderRef ref="ASSEMBLEIA-API" />
+		</Logger>
+
+		<Root level="debug">
+<!-- 			<AppenderRef ref="ConsoleAppender" /> -->
+			<AppenderRef ref="ASSEMBLEIA-API"/>
+		</Root>
+	</Loggers>
+</Configuration>
