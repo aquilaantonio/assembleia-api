@@ -9,22 +9,28 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Tolerate;
 
 @Data
-@AllArgsConstructor
 @Entity
-@NoArgsConstructor
+@Builder
 public class Voto implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3900417864912990983L;
 	@Id
 	@EqualsAndHashCode.Exclude
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id;
-	@ManyToOne
-	private Associado associado;
+	private String cpf ;
 	@EqualsAndHashCode.Exclude
-	private boolean voto;
+	private TypeVoto voto;
+	 @Tolerate
+	 Voto() {}
 
 }

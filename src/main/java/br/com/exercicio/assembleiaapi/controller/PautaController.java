@@ -21,50 +21,95 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.exercicio.assembleiaapi.model.Pauta;
+import br.com.exercicio.assembleiaapi.model.Voto;
 import br.com.exercicio.assembleiaapi.repository.Pautas;
+import br.com.exercicio.assembleiaapi.request.PautaRequest;
+import br.com.exercicio.assembleiaapi.request.ResultadoPautaRequest;
+import br.com.exercicio.assembleiaapi.request.SessaoRequest;
+import br.com.exercicio.assembleiaapi.request.VotoRequest;
+import br.com.exercicio.assembleiaapi.response.PautaResponse;
+import br.com.exercicio.assembleiaapi.response.ResultadoPautaResponse;
+import br.com.exercicio.assembleiaapi.response.SessaoResponse;
+import br.com.exercicio.assembleiaapi.response.VotoResponse;
 import br.com.exercicio.assembleiaapi.service.PautaService;
+import br.com.exercicio.assembleiaapi.service.SessaoService;
 
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/assembleia-api/v1/pautas")
 public class PautaController {
 	private static final Logger logger = LoggerFactory.getLogger(PautaController.class);
-	
+
 	@Autowired
-	private PautaService service;
-	
+	private PautaService pautaService;
+
+	@Autowired
+	private SessaoService sessaoService;
+
 	@GetMapping
-	public List<Pauta> listar() {
-		return service.listar();
+	public List<Pauta> listarPautas() {
+		return pautaService.listar();
 	}
-	
-	@PostMapping
-	public Pauta adicionar(@RequestBody @Valid Pauta pauta) {
 
-		return service.adicionar(pauta);
-
-	}
-	
-	@PutMapping
-	public ResponseEntity<Pauta> update(@RequestBody @Valid Pauta pauta) {
+	@PostMapping()
+	public ResponseEntity<Object> criarPauta(@RequestBody @Valid PautaRequest request) {
+		ResponseEntity<Object> response;
+		PautaResponse pautaResponse;
 		try {
-			pauta.toBuilder();
-			if(pauta.getId()!=null ) {
-				Pauta transactionToUpdate = service.findById(Long.valueOf(pauta.getId()));
-				if(transactionToUpdate == null){
-					logger.info("Pauta não encontrada");
-					return ResponseEntity.notFound().build(); 
-				}else {
-					Pauta pautaUpdate = service.update(transactionToUpdate, pauta);
-					return ResponseEntity.ok(pautaUpdate);
-				}
-			}else {
-				return ResponseEntity.badRequest().body(null);
+			pautaResponse = pautaService.adicionar(request);
+			if (pautaResponse.getPauta() != null) {
+				response = ResponseEntity.ok(pautaResponse);
+			} else {
+				response = ResponseEntity.badRequest().body(pautaResponse);
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			logger.error("JSON fields are not parsable.", e);
-			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
+			response = ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e.getMessage());
 		}
+		return response;
+
 	}
-	
+
+	@PutMapping(path = "/votar")
+	public ResponseEntity<Object> votar(@RequestBody @Valid VotoRequest request) {
+		ResponseEntity<Object> response;
+		VotoResponse votoResponse;
+		try {
+			if (sessaoService.isAssociadoValid(request.getCpf())) {
+				votoResponse = sessaoService.votar(request);
+				response = votoResponse.getVoto() != null ? ResponseEntity.ok(votoResponse)	: ResponseEntity.badRequest().body(votoResponse);
+			} else {
+				response = ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body("Dados do associado não aceito, por favor revisar as informações");
+			}
+
+		} catch (Exception e) {
+			logger.error("", e);
+			response = ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
+		}
+		return response;
+
+	}
+
+	@PostMapping(path = "/abrirSessao")
+	public ResponseEntity<Object> abrirSessao(@RequestBody @Valid SessaoRequest request) {
+		SessaoResponse response = sessaoService.abrirSessao(request);
+		if (response != null && response.getSessao() != null)
+			return ResponseEntity.ok().body(response);
+
+		return ResponseEntity.badRequest().body(response);
+
+	}
+
+	@PostMapping(path = "/resultado")
+	public ResponseEntity<Object> resultado(@RequestBody @Valid ResultadoPautaRequest request) {
+
+		ResultadoPautaResponse response = pautaService.obterResultadoPauta(request);
+		if (response.getResultado() != null)
+			return ResponseEntity.ok().body(response);
+
+		return ResponseEntity.badRequest().body(response);
+
+	}
+
 }
