@@ -1,0 +1,492 @@
+{
+	"info": {
+		"_postman_id": "bc73bfa3-357a-491f-baee-434fa3c0ca75",
+		"name": "Assembleia-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/assembleia-api/v1/pautas/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/assembleia-api/v1/pautas/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assembleia-api",
+						"v1",
+						"pautas",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post-pauta",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"titulo\": \"Estudar 1\",\r\n            \"topicos\": [\r\n                \" RESTfull\",\r\n                \" Spring boot\",\r\n                \" type script\"\r\n            ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/assembleia-api/v1/pautas/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assembleia-api",
+						"v1",
+						"pautas",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post abrirSessão",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idPauta\":\"1\",\r\n    \"tempoDeSessao\":\"2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/assembleia-api/v1/pautas/abrirSessao",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assembleia-api",
+						"v1",
+						"pautas",
+						"abrirSessao"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put votar",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \r\n       \r\n        \"cpf\":\"80344933091\",\r\n        \"voto\" :\"sim\"\r\n\r\n     \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/assembleia-api/v1/pautas/votar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assembleia-api",
+						"v1",
+						"pautas",
+						"votar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put votar 2",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{     \r\n        \"cpf\":\"55081258091\",\r\n        \"voto\" :\"sim\"\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/assembleia-api/v1/pautas/votar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assembleia-api",
+						"v1",
+						"pautas",
+						"votar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put votar 3",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{     \r\n        \"cpf\":\"55081258091\",\r\n        \"voto\" :\"nao\"\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/assembleia-api/v1/pautas/votar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assembleia-api",
+						"v1",
+						"pautas",
+						"votar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put votar 4",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{     \r\n        \"cpf\":\"550812581\",\r\n        \"voto\" :\"ok\"\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/assembleia-api/v1/pautas/votar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assembleia-api",
+						"v1",
+						"pautas",
+						"votar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put votar 5",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{     \r\n        \"cpf\":\"29256312077\",\r\n        \"voto\" :\"nao\"\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/assembleia-api/v1/pautas/votar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assembleia-api",
+						"v1",
+						"pautas",
+						"votar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put votar 6",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{     \r\n        \"cpf\":\"35454236039\",\r\n        \"voto\" :\"sim\"\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/assembleia-api/v1/pautas/votar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assembleia-api",
+						"v1",
+						"pautas",
+						"votar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put votar 7",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{     \r\n        \"cpf\":\"55081258091\",\r\n        \"voto\" :\"sim\"\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/assembleia-api/v1/pautas/votar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assembleia-api",
+						"v1",
+						"pautas",
+						"votar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put votar 8",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{     \r\n        \"cpf\":\"551258091\",\r\n        \"voto\" :\"sim\"\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/assembleia-api/v1/pautas/votar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assembleia-api",
+						"v1",
+						"pautas",
+						"votar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put votar 9",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{     \r\n        \"cpf\":\"ojuara\",\r\n        \"voto\" :\"sim\"\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/assembleia-api/v1/pautas/votar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assembleia-api",
+						"v1",
+						"pautas",
+						"votar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put votar 10",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{     \r\n        \"cpf\":\"02706807059\",\r\n        \"voto\" :\"sim\"\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/assembleia-api/v1/pautas/votar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assembleia-api",
+						"v1",
+						"pautas",
+						"votar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all resutado",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/assembleia-api/v1/pautas/resultado",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assembleia-api",
+						"v1",
+						"pautas",
+						"resultado"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "resutado  1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"IdPauta\":1\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/assembleia-api/v1/pautas/resultado",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"assembleia-api",
+						"v1",
+						"pautas",
+						"resultado"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
