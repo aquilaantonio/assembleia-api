@@ -7,6 +7,11 @@ import javax.persistence.Id;
 
 import lombok.Data;
 
+/**
+ * Entidade criada para representa o resultado da votações de uma pauta.
+ * @author aquila.pereira
+ *
+ */
 @Data
 @Entity
 public class ResultadoPauta {

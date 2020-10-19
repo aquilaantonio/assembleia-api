@@ -33,7 +33,6 @@ import br.com.exercicio.assembleiaapi.response.VotoResponse;
 @Service
 public class SessaoService {
 	Logger logger = LoggerFactory.getLogger(SessaoService.class);
-	private static final String HTTPS_USER_INFO_HEROKUAPP_COM_USERS = "https://user-info.herokuapp.com/users/";
 
 	@Autowired
 	private PautaService pautaSerivce;
@@ -64,10 +63,15 @@ public class SessaoService {
 
 	}
 
+	/**
+	 * metodo reponsavel por validar se o cpf esta apto para a votacao
+	 * @param cpf
+	 * @return
+	 */
 	public boolean isAssociadoValid(String cpf) {
 		boolean retorno = false;
 		CloseableHttpClient httpClient = HttpClients.createDefault();
-		HttpGet request = new HttpGet(HTTPS_USER_INFO_HEROKUAPP_COM_USERS.concat(cpf));
+		HttpGet request = new HttpGet(UserInfo.HTTPS_USER_INFO_HEROKUAPP_COM_USERS.concat(cpf));
 		try (CloseableHttpResponse response = httpClient.execute(request)) {
 			HttpEntity entity = response.getEntity();
 
@@ -77,11 +81,8 @@ public class SessaoService {
 				retorno = result.getStatus().equalsIgnoreCase(UserInfo.ABLE_TO_VOTE);
 			}
 
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.error("Erro na validacao do cpf",e);
 		}
 
 		return retorno;
@@ -92,7 +93,11 @@ public class SessaoService {
 		String body = EntityUtils.toString(httpEntity, "UTF-8");
 		return this.mapper.readValue(body, clazz);
 	}
-
+/**
+ * metodo reposavel por verificar se a pauta ainda e valida e iniciar a sessao de votacao.
+ * @param SessaoRequest
+ * @return SessaoResponse
+ */
 	public SessaoResponse abrirSessao(SessaoRequest request) {
 		SessaoResponse retorno = null;
 		try {

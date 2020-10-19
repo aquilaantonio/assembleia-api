@@ -7,11 +7,6 @@
 		<Property name="log-path">./log</Property>
 	</Properties>
 	<Appenders>
-<!-- 		<Console name="ConsoleAppender" target="SYSTEM_OUT" -->
-<!-- 			follow="true"> -->
-<!-- 			<PatternLayout pattern="${LOG_PATTERN}" /> -->
-<!-- 		</Console> -->
-
 		<RollingRandomAccessFile name="ASSEMBLEIA-API"
 			fileName="${log-path}/assembleia-api.log"
 			filePattern="${log-path}/assembleia-api/assembleia-api-%d{yyyy-MM-dd}.%i.zip"
@@ -40,8 +35,7 @@
 			<AppenderRef ref="ASSEMBLEIA-API" />
 		</Logger>
 
-		<Root level="debug">
-<!-- 			<AppenderRef ref="ConsoleAppender" /> -->
+		<Root level="trace">
 			<AppenderRef ref="ASSEMBLEIA-API"/>
 		</Root>
 	</Loggers>

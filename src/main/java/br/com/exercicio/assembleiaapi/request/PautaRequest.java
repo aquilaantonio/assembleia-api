@@ -9,7 +9,6 @@ import java.util.LinkedHashSet;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
-import lombok.NonNull;
 
 /**
  * @author aquila.pereira

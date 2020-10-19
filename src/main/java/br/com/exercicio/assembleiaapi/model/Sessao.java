@@ -8,7 +8,11 @@ import javax.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/**
+ * Classe reperenseta uma sessao de votacao onde seram realizado o controle do tempo a votação de uma pauta
+ * @author aquila.pereira
+ *
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

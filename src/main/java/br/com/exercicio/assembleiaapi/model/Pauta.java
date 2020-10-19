@@ -56,7 +56,8 @@ public class Pauta {
 	@Tolerate
 	Pauta() {
 	}
-
+	
+	
 	public void contabilizarVotos() {
 		if (fechado) {
 			long quantidadeNAO = this.getVotos().stream().filter(p -> p.getVoto().equals(TypeVoto.NAO)).count();

@@ -1,32 +1,19 @@
 package br.com.exercicio.assembleiaapi.service;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import br.com.exercicio.assembleiaapi.controller.PautaController;
-import br.com.exercicio.assembleiaapi.model.PautaEvent;
 import br.com.exercicio.assembleiaapi.model.Pauta;
+import br.com.exercicio.assembleiaapi.model.PautaEvent;
 import br.com.exercicio.assembleiaapi.model.ResultadoPauta;
-import br.com.exercicio.assembleiaapi.model.TypeVoto;
-import br.com.exercicio.assembleiaapi.model.Voto;
 import br.com.exercicio.assembleiaapi.repository.Pautas;
 import br.com.exercicio.assembleiaapi.request.PautaRequest;
 import br.com.exercicio.assembleiaapi.request.ResultadoPautaRequest;
@@ -69,7 +56,11 @@ public class PautaService implements ApplicationListener<PautaEvent> {
 		return Pauta.builder().titulo(request.getTitulo()).topicos(request.getTopicos())
 				.dataCriacao(LocalDateTime.now()).build();
 	}
-	
+	/**
+	 * metodo responsavel por obter das pautas o resultado das votacoes
+	 * @param ResultadoPautaRequest
+	 * @return ResultadoPautaResponse 
+	 */
 	public ResultadoPautaResponse obterResultadoPauta(ResultadoPautaRequest request) {
 		ResultadoPautaResponse response =  new ResultadoPautaResponse();
 		List<Pauta> list = new ArrayList<Pauta>();

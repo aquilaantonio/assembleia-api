@@ -14,7 +14,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Tolerate;
-
+/**
+ * Classe representa o voto  que contem a identificação de um associado e o seu respectivo voto
+ * @author aquila.pereira
+ *
+ */
 @Data
 @Entity
 @Builder
