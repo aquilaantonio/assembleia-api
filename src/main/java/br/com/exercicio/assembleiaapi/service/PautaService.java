@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -37,7 +38,7 @@ public class PautaService implements ApplicationListener<PautaEvent> {
 			Pauta pauta = convertRequest(request);
 			response.setPauta(pautas.saveAndFlush(pauta));
 		} catch (Exception e) {
-			logger.error("Erro ao criar a pauta",e);
+			logger.error("Erro ao criar a pauta", e);
 			response.setFaultString("Falha ao criar pauta");
 		}
 		return response;
@@ -56,34 +57,36 @@ public class PautaService implements ApplicationListener<PautaEvent> {
 		return Pauta.builder().titulo(request.getTitulo()).topicos(request.getTopicos())
 				.dataCriacao(LocalDateTime.now()).build();
 	}
+
 	/**
 	 * metodo responsavel por obter das pautas o resultado das votacoes
+	 * 
 	 * @param ResultadoPautaRequest
-	 * @return ResultadoPautaResponse 
+	 * @return ResultadoPautaResponse
 	 */
 	public ResultadoPautaResponse obterResultadoPauta(ResultadoPautaRequest request) {
-		ResultadoPautaResponse response =  new ResultadoPautaResponse();
+		ResultadoPautaResponse response = new ResultadoPautaResponse();
 		List<Pauta> list = new ArrayList<Pauta>();
 		try {
-			
-			if (request.getIdPauta()!=null && request.getIdPauta()>0) {
+
+			if (request.getIdPauta() != null && request.getIdPauta() > 0) {
 				list.add(this.findById(request.getIdPauta()));
-			}else {
+			} else {
 				list.addAll(this.listar());
 			}
 			response.setResultado(this.obterListaResultadoPauta(list));
 		} catch (Exception e) {
-			logger.error("",e);
+			logger.error("", e);
 			response.setFaultString("Erro ao obter o resultado da pauta");
 		}
 		return response;
-		
+
 	}
-	
+
 	private List<ResultadoPauta> obterListaResultadoPauta(List<Pauta> listPauta) {
 		List<ResultadoPauta> listResultPauta = new ArrayList<ResultadoPauta>();
 		listPauta.forEach(l -> {
-				listResultPauta.add(l.getResultado());
+			listResultPauta.add(l.getResultado());
 		}
 
 		);
@@ -93,6 +96,15 @@ public class PautaService implements ApplicationListener<PautaEvent> {
 	@Override
 	public void onApplicationEvent(PautaEvent event) {
 		pautas.saveAndFlush(event.getPauta());
-		
+
+	}
+
+	@Component
+	class PautaListener implements ApplicationListener<PautaEvent> {
+		@Override
+		public void onApplicationEvent(PautaEvent event) {
+			System.out.println("Received spring custom event - " + event.getPauta().getTitulo());
+			pautas.saveAndFlush(event.getPauta());
+		}
 	}
 }

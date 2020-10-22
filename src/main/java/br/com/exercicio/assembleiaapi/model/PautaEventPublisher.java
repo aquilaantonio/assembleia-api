@@ -2,11 +2,10 @@ package br.com.exercicio.assembleiaapi.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PautaEventPublisher implements ApplicationEventPublisherAware {
+public class PautaEventPublisher {
 	@Autowired
 	private ApplicationEventPublisher applicationEventPublisher;
 
@@ -15,10 +14,5 @@ public class PautaEventPublisher implements ApplicationEventPublisherAware {
 		applicationEventPublisher.publishEvent(event);
 	}
 
-	@Override
-	public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
-		this.applicationEventPublisher = applicationEventPublisher;
-
-	}
 
 }
