@@ -8,6 +8,8 @@ import javax.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+
 /**
  * Classe reperenseta uma sessao de votacao onde seram realizado o controle do tempo a votação de uma pauta
  * @author aquila.pereira
@@ -22,7 +24,8 @@ public class Sessao {
 	private Pauta pauta;
 	protected boolean ativa = false;
 	private long tempoExecucao;
-	
+	@Autowired
+	PautaEventPublisher publisher;
 	
 	@AllArgsConstructor
 	class SessaoTask extends TimerTask {
@@ -49,9 +52,9 @@ public class Sessao {
 		timer.schedule(task, delay, period);
 		this.ativa=true;
 	}
+
 	public void dispararResultado() {
 		pauta.contabilizarVotos();
-		PautaEventPublisher publisher = new PautaEventPublisher();
 		publisher.publisherAssembleaEvent(pauta);
 		
 	}
